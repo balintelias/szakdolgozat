@@ -22,11 +22,10 @@ def X1(n):
     X[0] = 1
 
     # cyclic shifting
-    for i in range(n + 31):
-        print(f"cyclic shift: {i} {i + 31} / {n}")
+    for i in range(n - 31):
         X[i + 31] = (X[i + 3] + X[i]) % 2
 
-    return X
+    return X[n - 1]
 
 
 def X2(n):
@@ -63,4 +62,4 @@ def C_init(n_PRS_idseq, Nslot_symb, n, l):
 MAIN STARTING HERE
 """
 
-X2(35)
+X1(35)
