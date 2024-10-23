@@ -4,16 +4,20 @@ import math
 
 
 def r(m):
-    return 1 / sqrt(2) * (1 - 2 * c(2 * m)) + 1j * 1 / sqrt(2) * (1 - 2 * c(2 * m))
+    return 1 / math.sqrt(2) * (1 - 2 * c(2 * m)) + 1j * 1 / math.sqrt(2) * (
+        1 - 2 * c(2 * m)
+    )
 
 
-def c(n, C_init):
+def c(limit):
+    vector = np.zeros(limit)
+
     Nc = 1600
     # n = 0,1,2...,M_pn-1
-    n = 5  # arbitrary
-    ret_value = X1(n + Nc) + X2(n + Nc)
-    ret_value = ret_value % 2
-    return ret_value
+    for n in range(limit):
+        vector[n] = (X1(n + Nc) + X2(n + Nc)) % 2
+
+    return vector
 
 
 def X1(n):
@@ -41,8 +45,7 @@ def X2(n):
     for i in range(n - 31):
         X[i + 31] = (X[i + 3] + X[i]) % 2
 
-    print(f"{n} and {X[n-1]}")
-    return X[n-1] # Solve indexing
+    return X[n - 1]  # Solve indexing
 
 
 def C_init(n_PRS_idseq, Nslot_symb, n, l):
@@ -62,4 +65,10 @@ def C_init(n_PRS_idseq, Nslot_symb, n, l):
 MAIN STARTING HERE
 """
 
-X1(35)
+
+def main():
+    vector = r(35)
+
+
+if __name__ == "__main__":
+    main()
